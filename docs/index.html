@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Africa–Europe Research Coverage Map · Meridian17</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --dark-green:  #024203;
+      --mid-green:   #026203;
+      --bright-green:#028203;
+      --near-black:  #171717;
+      --off-white:   #ededed;
+      --border:      #d8d8d0;
+      --white:       #ffffff;
+      --muted:       #555555;
+
+      /* heatmap colour stops (0 → max) */
+      --heat-0:   #f7f7f0;   /* empty / near-zero */
+      --heat-low: #c8e6c8;
+      --heat-mid: #5aab5a;
+      --heat-hi:  #024203;
+    }
+
+    body {
+      font-family: 'Heebo', sans-serif;
+      background: var(--off-white);
+      color: var(--near-black);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* ── Header ── */
+    .site-header {
+      background: var(--dark-green);
+      color: #fff;
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .site-header__wordmark {
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: #fff;
+      text-decoration: none;
+    }
+    .site-header__sep { opacity: 0.35; }
+    .site-header__title {
+      font-size: 14px;
+      font-weight: 300;
+      opacity: 0.85;
+    }
+
+    /* ── Page body ── */
+    .page { max-width: 1320px; margin: 0 auto; padding: 48px 32px 80px; }
+
+    .intro { margin-bottom: 40px; max-width: 700px; }
+    .intro h1 { font-size: 30px; font-weight: 500; margin-bottom: 12px; }
+    .intro p  { color: var(--muted); font-size: 15px; line-height: 1.75; }
+
+    .meta-row {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .meta-row strong { color: var(--near-black); }
+
+    /* ── Legend ── */
+    .legend {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .legend__scale {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .legend__gradient {
+      width: 140px;
+      height: 14px;
+      border-radius: 3px;
+      background: linear-gradient(to right, var(--heat-0), var(--heat-low), var(--heat-mid), var(--heat-hi));
+      border: 1px solid var(--border);
+    }
+    .legend__dir {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .legend__dot {
+      width: 10px; height: 10px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    /* ── Direction group ── */
+    .direction-group { margin-bottom: 48px; }
+    .direction-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--mid-green);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--mid-green);
+      display: inline-block;
+    }
+
+    /* ── Heatmap table ── */
+    .heatmap-wrap { overflow-x: auto; }
+
+    table.heatmap {
+      border-collapse: collapse;
+      min-width: 640px;
+      width: 100%;
+    }
+
+    table.heatmap th,
+    table.heatmap td {
+      padding: 0;
+      font-weight: 400;
+    }
+
+    /* Column headers (sources) */
+    .heatmap thead th {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: center;
+      padding: 6px 4px 10px;
+      min-width: 72px;
+    }
+    .heatmap thead th.theme-col { text-align: left; min-width: 220px; padding-left: 0; }
+
+    /* Row headers (themes) */
+    .heatmap tbody tr { cursor: default; }
+    .heatmap tbody tr:hover td { filter: brightness(0.94); }
+
+    .heatmap td.theme-name {
+      font-size: 13px;
+      font-weight: 400;
+      padding: 6px 16px 6px 0;
+      white-space: nowrap;
+      color: var(--near-black);
+      vertical-align: middle;
+    }
+
+    /* Cells */
+    .heatmap td.cell {
+      text-align: center;
+      vertical-align: middle;
+      padding: 3px 4px;
+    }
+    .cell-inner {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 60px;
+      height: 36px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 500;
+      transition: transform 0.1s;
+      cursor: default;
+      position: relative;
+    }
+    .cell-inner:hover { transform: scale(1.08); z-index: 10; }
+
+    /* ── Tooltip ── */
+    .tooltip {
+      position: fixed;
+      background: var(--near-black);
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-size: 13px;
+      line-height: 1.55;
+      max-width: 260px;
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0;
+      transition: opacity 0.15s;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    }
+    .tooltip.visible { opacity: 1; }
+    .tooltip strong { display: block; margin-bottom: 4px; font-weight: 600; }
+    .tooltip em { font-style: normal; opacity: 0.7; font-size: 12px; }
+
+    /* ── Summary cards ── */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 48px;
+    }
+    .summary-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 24px;
+    }
+    .summary-card__num {
+      font-size: 36px;
+      font-weight: 500;
+      color: var(--dark-green);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .summary-card__label { font-size: 13px; color: var(--muted); }
+
+    .footer {
+      margin-top: 64px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .footer a { color: var(--mid-green); }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="site-header__wordmark" href="https://meridian17.org">Meridian17</a>
+  <span class="site-header__sep">·</span>
+  <span class="site-header__title">Research Coverage Map</span>
+</header>
+
+<div class="tooltip" id="tooltip"></div>
+
+<main class="page">
+  <div class="intro">
+    <h1>Africa–Europe Policy Research Coverage</h1>
+    <p>
+      How well do leading Africa-Europe policy think tanks cover the key themes
+      shaping the relationship between the two continents? Each cell shows the
+      number of publications from that source that contain substantive coverage
+      of the theme, based on keyword detection across full-text embeddings.
+    </p>
+    <div class="meta-row" id="meta-row">
+      <span>Loading…</span>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="legend__scale">
+      <span>0</span>
+      <div class="legend__gradient"></div>
+      <span>High coverage</span>
+    </div>
+    <div class="legend__dir">
+      <div class="legend__dot" style="background:#dbeafe"></div>
+      Europe → Africa
+    </div>
+    <div class="legend__dir">
+      <div class="legend__dot" style="background:#fce7f3"></div>
+      Africa → Europe
+    </div>
+    <div class="legend__dir">
+      <div class="legend__dot" style="background:#f3f4f6"></div>
+      Bilateral
+    </div>
+  </div>
+
+  <div id="heatmap-container">
+    <p style="color:var(--muted)">Loading data…</p>
+  </div>
+
+  <div class="summary-grid" id="summary-grid" style="display:none"></div>
+
+  <div class="footer">
+    Generated by <a href="https://meridian17.org">Meridian17</a> from full-text analysis of
+    publications from ECDPM, ODI, SAIIA, TIPS, Policy Center for the New South, and ACET.
+    <span id="footer-date"></span>
+  </div>
+</main>
+
+<script>
+const DIRECTION_LABELS = {
+  europe_to_africa: 'Europe → Africa',
+  africa_to_europe: 'Africa → Europe',
+  bilateral:        'Bilateral',
+};
+const DIRECTION_ORDER = ['europe_to_africa', 'africa_to_europe', 'bilateral'];
+const DIRECTION_ROW_BG = {
+  europe_to_africa: '#f0f7f0',
+  africa_to_europe: '#fdf4f8',
+  bilateral:        '#f7f7f7',
+};
+
+// ── Colour scale ──────────────────────────────────────────────────────────────
+function heatColour(value, max) {
+  if (value === 0) return { bg: '#f0f0eb', fg: '#aaa' };
+  const t = Math.pow(value / max, 0.5);   // sqrt scale compresses the top
+  // interpolate: off-white → light green → mid-green → dark-green
+  const stops = [
+    [248, 247, 240],
+    [200, 230, 200],
+    [90,  171,  90],
+    [2,    66,   3],
+  ];
+  const seg  = t * (stops.length - 1);
+  const idx  = Math.min(Math.floor(seg), stops.length - 2);
+  const frac = seg - idx;
+  const [r1,g1,b1] = stops[idx];
+  const [r2,g2,b2] = stops[idx + 1];
+  const r = Math.round(r1 + (r2 - r1) * frac);
+  const g = Math.round(g1 + (g2 - g1) * frac);
+  const b = Math.round(b1 + (b2 - b1) * frac);
+  const brightness = 0.299*r + 0.587*g + 0.114*b;
+  return {
+    bg: `rgb(${r},${g},${b})`,
+    fg: brightness > 140 ? '#171717' : '#ffffff',
+  };
+}
+
+// ── Tooltip ───────────────────────────────────────────────────────────────────
+const tooltipEl = document.getElementById('tooltip');
+let tooltipData = null;
+
+document.addEventListener('mousemove', (e) => {
+  if (!tooltipData) return;
+  const pad = 16;
+  let x = e.clientX + pad;
+  let y = e.clientY + pad;
+  if (x + 280 > window.innerWidth)  x = e.clientX - 280 - pad;
+  if (y + 120 > window.innerHeight) y = e.clientY - 120 - pad;
+  tooltipEl.style.left = x + 'px';
+  tooltipEl.style.top  = y + 'px';
+});
+
+function showTooltip(theme, sourceName, count, description) {
+  tooltipData = { theme, sourceName, count };
+  const pubWord = count === 1 ? 'publication' : 'publications';
+  tooltipEl.innerHTML = `
+    <strong>${theme.label}</strong>
+    ${sourceName}: <strong>${count}</strong> ${pubWord}<br>
+    <em>${description.slice(0, 120)}…</em>
+  `;
+  tooltipEl.classList.add('visible');
+}
+function hideTooltip() {
+  tooltipData = null;
+  tooltipEl.classList.remove('visible');
+}
+
+// ── Build heatmap ─────────────────────────────────────────────────────────────
+function buildHeatmap(data) {
+  // Meta row
+  const date = new Date(data.generated_at).toLocaleDateString('en-GB', {
+    day: 'numeric', month: 'long', year: 'numeric'
+  });
+  document.getElementById('meta-row').innerHTML = `
+    <span><strong>${data.total_chunks.toLocaleString()}</strong> embedded text chunks</span>
+    <span><strong>${data.sources.length}</strong> think tanks</span>
+    <span><strong>${data.themes.length}</strong> policy themes</span>
+    <span>Generated ${date}</span>
+  `;
+  document.getElementById('footer-date').textContent = `· ${date}`;
+
+  // Max value across all cells (for colour scale)
+  let maxVal = 0;
+  data.themes.forEach(t => {
+    Object.values(t.coverage).forEach(v => { if (v > maxVal) maxVal = v; });
+  });
+
+  // Group themes by direction
+  const grouped = {};
+  DIRECTION_ORDER.forEach(d => { grouped[d] = []; });
+  data.themes.forEach(t => { grouped[t.direction].push(t); });
+
+  const container = document.getElementById('heatmap-container');
+  container.innerHTML = '';
+
+  DIRECTION_ORDER.forEach(dir => {
+    const themes = grouped[dir];
+    if (!themes.length) return;
+
+    const group = document.createElement('div');
+    group.className = 'direction-group';
+
+    const label = document.createElement('div');
+    label.className = 'direction-label';
+    label.textContent = DIRECTION_LABELS[dir];
+    group.appendChild(label);
+
+    const wrap = document.createElement('div');
+    wrap.className = 'heatmap-wrap';
+
+    const table = document.createElement('table');
+    table.className = 'heatmap';
+
+    // Header
+    const thead = document.createElement('thead');
+    const hrow  = document.createElement('tr');
+    const thTheme = document.createElement('th');
+    thTheme.className = 'theme-col';
+    thTheme.textContent = 'Theme';
+    hrow.appendChild(thTheme);
+    data.sources.forEach(src => {
+      const th = document.createElement('th');
+      th.textContent = srcAbbrev(src.key);
+      th.title = src.name;
+      hrow.appendChild(th);
+    });
+    thead.appendChild(hrow);
+    table.appendChild(thead);
+
+    // Body
+    const tbody = document.createElement('tbody');
+    themes.forEach(theme => {
+      const tr = document.createElement('tr');
+
+      const tdName = document.createElement('td');
+      tdName.className = 'theme-name';
+      tdName.textContent = theme.label;
+      tr.appendChild(tdName);
+
+      data.sources.forEach(src => {
+        const count = theme.coverage[src.key] ?? 0;
+        const { bg, fg } = heatColour(count, maxVal);
+
+        const td = document.createElement('td');
+        td.className = 'cell';
+
+        const inner = document.createElement('div');
+        inner.className = 'cell-inner';
+        inner.style.background = bg;
+        inner.style.color = fg;
+        inner.textContent = count;
+
+        inner.addEventListener('mouseenter', () =>
+          showTooltip(theme, src.name, count, theme.description));
+        inner.addEventListener('mouseleave', hideTooltip);
+
+        td.appendChild(inner);
+        tr.appendChild(td);
+      });
+
+      tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
+    wrap.appendChild(table);
+    group.appendChild(wrap);
+    container.appendChild(group);
+  });
+
+  // Summary cards
+  const totalPubs = (() => {
+    const seen = new Set();
+    // count unique source×count combos — just sum all coverages as proxy
+    let t = 0;
+    data.themes.forEach(th => { /* max per source to avoid double-count */});
+    // simpler: show per-source totals from first theme that covers everything
+    return null;
+  })();
+
+  const summaryGrid = document.getElementById('summary-grid');
+  summaryGrid.style.display = 'grid';
+
+  const cards = [
+    { num: data.sources.length,              label: 'Think tanks indexed' },
+    { num: data.themes.length,               label: 'Policy themes tracked' },
+    { num: data.total_chunks.toLocaleString(), label: 'Embedded text chunks' },
+    { num: data.summary.gaps,                label: 'Coverage gaps (0 pubs)', highlight: data.summary.gaps > 0 },
+    { num: data.summary.near_gaps,           label: 'Near-gaps (1–2 pubs)' },
+  ];
+
+  cards.forEach(c => {
+    const card = document.createElement('div');
+    card.className = 'summary-card';
+    card.innerHTML = `
+      <div class="summary-card__num" style="${c.highlight ? 'color:#c0392b' : ''}">${c.num}</div>
+      <div class="summary-card__label">${c.label}</div>
+    `;
+    summaryGrid.appendChild(card);
+  });
+}
+
+function srcAbbrev(key) {
+  return {
+    ecdpm:         'ECDPM',
+    saiia:         'SAIIA',
+    tips:          'TIPS',
+    acet:          'ACET',
+    odi:           'ODI',
+    policy_center: 'PolCtr',
+  }[key] || key;
+}
+
+// ── Load data ─────────────────────────────────────────────────────────────────
+fetch('gap_analysis.json')
+  .then(r => {
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    return r.json();
+  })
+  .then(buildHeatmap)
+  .catch(err => {
+    document.getElementById('heatmap-container').innerHTML = `
+      <p style="color:#c0392b; font-size:14px;">
+        Could not load <code>gap_analysis.json</code>: ${err.message}<br>
+        Run: <code>.venv/bin/python analysis/query.py --gap-analysis --json-out docs/gap_analysis.json</code>
+      </p>`;
+  });
+</script>
+</body>
+</html>

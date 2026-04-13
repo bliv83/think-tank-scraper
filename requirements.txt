@@ -1,0 +1,11 @@
+requests
+beautifulsoup4
+playwright
+playwright-stealth
+camoufox
+pymupdf
+sqlite-utils
+langdetect
+tqdm
+python-dotenv
+chromadb

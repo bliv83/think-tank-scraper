@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# Data — large files not for version control
+data/raw/
+data/chroma/
+data/metadata/
+
+# Logs
+logs/
+
+# macOS
+.DS_Store
+
+# Environment
+.env

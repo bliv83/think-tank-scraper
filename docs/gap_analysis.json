@@ -1,0 +1,262 @@
+{
+  "generated_at": "2026-04-13T19:43:10.509561+00:00",
+  "total_chunks": 86143,
+  "sources": [
+    {
+      "key": "ecdpm",
+      "name": "European Centre for Development Policy Management"
+    },
+    {
+      "key": "odi",
+      "name": "Overseas Development Institute"
+    },
+    {
+      "key": "saiia",
+      "name": "South African Institute of International Affairs"
+    },
+    {
+      "key": "tips",
+      "name": "Trade & Industrial Policy Strategies"
+    },
+    {
+      "key": "policy_center",
+      "name": "Policy Center for the New South"
+    },
+    {
+      "key": "acet",
+      "name": "African Center for Economic Transformation"
+    }
+  ],
+  "themes": [
+    {
+      "id": "fdi_investment_climate",
+      "label": "FDI & Investment Climate",
+      "direction": "europe_to_africa",
+      "description": "Covers foreign direct investment flows from Europe into Africa, the investment climate and regulatory environment for European companies, and barriers and enablers to market entry on the continent.",
+      "coverage": {
+        "ecdpm": 151,
+        "odi": 579,
+        "saiia": 249,
+        "tips": 84,
+        "policy_center": 343,
+        "acet": 47
+      },
+      "coverage_pct": 100.0
+    },
+    {
+      "id": "development_finance",
+      "label": "Development Finance",
+      "direction": "europe_to_africa",
+      "description": "Covers development finance institutions (DFIs), blended finance structures, and concessional lending instruments deployed by European public and quasi-public financiers to mobilise private investment in Africa.",
+      "coverage": {
+        "ecdpm": 158,
+        "odi": 616,
+        "saiia": 265,
+        "tips": 91,
+        "policy_center": 362,
+        "acet": 51
+      },
+      "coverage_pct": 100.0
+    },
+    {
+      "id": "european_business_operations",
+      "label": "European Business Operations in Africa",
+      "direction": "europe_to_africa",
+      "description": "Covers the operational experience of European companies on the ground in Africa, including joint ventures, local partnerships, supply chain localisation, and corporate strategies for the African market.",
+      "coverage": {
+        "ecdpm": 77,
+        "odi": 214,
+        "saiia": 157,
+        "tips": 58,
+        "policy_center": 108,
+        "acet": 38
+      },
+      "coverage_pct": 100.0
+    },
+    {
+      "id": "african_market_access_europe",
+      "label": "African Market Access to Europe",
+      "direction": "africa_to_europe",
+      "description": "Covers the ability of African companies and exporters to access European markets, including tariff and non-tariff barriers, export promotion, and the competitive position of African goods and services in Europe.",
+      "coverage": {
+        "ecdpm": 48,
+        "odi": 118,
+        "saiia": 76,
+        "tips": 49,
+        "policy_center": 106,
+        "acet": 18
+      },
+      "coverage_pct": 100.0
+    },
+    {
+      "id": "eu_regulatory_barriers",
+      "label": "EU Regulatory Barriers & Compliance",
+      "direction": "africa_to_europe",
+      "description": "Covers EU regulations that create compliance costs or market access barriers for African producers and exporters, including the Carbon Border Adjustment Mechanism, deforestation regulation, supply chain due diligence, and sustainability reporting requirements.",
+      "coverage": {
+        "ecdpm": 66,
+        "odi": 78,
+        "saiia": 29,
+        "tips": 34,
+        "policy_center": 58,
+        "acet": 9
+      },
+      "coverage_pct": 100.0
+    },
+    {
+      "id": "african_capital_europe",
+      "label": "African Capital Flows to Europe",
+      "direction": "africa_to_europe",
+      "description": "Covers African-origin capital deployed in European markets, including sovereign wealth funds, pension funds, diaspora remittances and investment, and African institutional investors allocating to European assets.",
+      "coverage": {
+        "ecdpm": 3,
+        "odi": 16,
+        "saiia": 9,
+        "tips": 5,
+        "policy_center": 10,
+        "acet": 3
+      },
+      "coverage_pct": 100.0
+    },
+    {
+      "id": "talent_mobility",
+      "label": "Talent Mobility & Skills Partnerships",
+      "direction": "africa_to_europe",
+      "description": "Covers the movement of skilled African professionals to Europe, brain drain and brain gain dynamics, talent partnership frameworks, and circular migration schemes that link European labour demand with African supply.",
+      "coverage": {
+        "ecdpm": 35,
+        "odi": 130,
+        "saiia": 49,
+        "tips": 25,
+        "policy_center": 91,
+        "acet": 23
+      },
+      "coverage_pct": 100.0
+    },
+    {
+      "id": "trade_agreements",
+      "label": "Trade Agreements & Policy Frameworks",
+      "direction": "bilateral",
+      "description": "Covers formal trade agreements and policy frameworks shaping Europe–Africa trade, including the AfCFTA, Economic Partnership Agreements, WTO commitments, and preferential trade arrangements.",
+      "coverage": {
+        "ecdpm": 156,
+        "odi": 661,
+        "saiia": 305,
+        "tips": 109,
+        "policy_center": 377,
+        "acet": 56
+      },
+      "coverage_pct": 100.0
+    },
+    {
+      "id": "value_chains",
+      "label": "Value Chain Integration & Industrialisation",
+      "direction": "bilateral",
+      "description": "Covers integration of African economies into global and regional value chains, value capture and upgrading strategies, industrialisation policy, and local content requirements that affect Europe–Africa business linkages.",
+      "coverage": {
+        "ecdpm": 110,
+        "odi": 370,
+        "saiia": 203,
+        "tips": 109,
+        "policy_center": 261,
+        "acet": 44
+      },
+      "coverage_pct": 100.0
+    },
+    {
+      "id": "standards_certification",
+      "label": "Standards, Certification & Technical Barriers",
+      "direction": "bilateral",
+      "description": "Covers technical standards, product certification, mutual recognition agreements, and technical barriers to trade that affect the movement of goods and services between Africa and Europe.",
+      "coverage": {
+        "ecdpm": 145,
+        "odi": 636,
+        "saiia": 275,
+        "tips": 102,
+        "policy_center": 351,
+        "acet": 52
+      },
+      "coverage_pct": 100.0
+    },
+    {
+      "id": "digital_economy",
+      "label": "Digital Economy & Cross-Border Digital Trade",
+      "direction": "bilateral",
+      "description": "Covers digital trade, fintech, e-commerce platforms, and the policy and regulatory frameworks governing cross-border digital services and data flows between Africa and Europe.",
+      "coverage": {
+        "ecdpm": 163,
+        "odi": 682,
+        "saiia": 308,
+        "tips": 110,
+        "policy_center": 410,
+        "acet": 59
+      },
+      "coverage_pct": 100.0
+    },
+    {
+      "id": "critical_minerals",
+      "label": "Critical Minerals & Resources",
+      "direction": "bilateral",
+      "description": "Covers African mineral resources strategic to European supply chains, including battery metals for the energy transition, EU critical raw materials strategy, and beneficiation and value-addition opportunities for African mineral producers.",
+      "coverage": {
+        "ecdpm": 160,
+        "odi": 677,
+        "saiia": 306,
+        "tips": 110,
+        "policy_center": 408,
+        "acet": 56
+      },
+      "coverage_pct": 100.0
+    },
+    {
+      "id": "agribusiness_food_trade",
+      "label": "Agribusiness & Food Value Chains",
+      "direction": "bilateral",
+      "description": "Covers agricultural trade and investment between Africa and Europe, food value chains, agribusiness investment, and the SPS and food safety standards that govern market access for African agricultural exports.",
+      "coverage": {
+        "ecdpm": 134,
+        "odi": 174,
+        "saiia": 109,
+        "tips": 30,
+        "policy_center": 86,
+        "acet": 30
+      },
+      "coverage_pct": 100.0
+    },
+    {
+      "id": "access_to_finance",
+      "label": "Access to Finance",
+      "direction": "bilateral",
+      "description": "Covers financing constraints facing African firms and entrepreneurs, including SME finance, capital markets development, cross-border capital raising, and fintech solutions that expand credit access.",
+      "coverage": {
+        "ecdpm": 94,
+        "odi": 316,
+        "saiia": 144,
+        "tips": 36,
+        "policy_center": 132,
+        "acet": 42
+      },
+      "coverage_pct": 100.0
+    },
+    {
+      "id": "risk_derisking",
+      "label": "Risk & De-risking",
+      "direction": "bilateral",
+      "description": "Covers political risk, currency risk, and the instruments and institutions used to mitigate investment risk in African markets, including guarantees, insurance, and first-loss structures that crowd in private capital.",
+      "coverage": {
+        "ecdpm": 154,
+        "odi": 644,
+        "saiia": 291,
+        "tips": 105,
+        "policy_center": 396,
+        "acet": 50
+      },
+      "coverage_pct": 100.0
+    }
+  ],
+  "summary": {
+    "gaps": 0,
+    "near_gaps": 0,
+    "gap_list": []
+  }
+}
