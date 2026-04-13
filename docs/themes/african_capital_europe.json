@@ -4,94 +4,54 @@
   "sources": {
     "ecdpm": [
       {
-        "id": "a842ec818e727940",
-        "title": "The EU must reclaim its climate leadership",
-        "date": "2024-05-06",
-        "url": "https://ecdpm.org/work/eu-must-reclaim-its-climate-leadership",
-        "authors": "[\"Hanne Knaepen\"]",
-        "excerpt": "With the EIB moving towards becoming a climate  bank (including adaptation) bank, the EU should focus on providing more risk capital and guarantees in order to  facilitate large investments while maintaining EU support for small-scale local projects, notably in adaptation (EPP  Group 2022). African governments should also create an enabling environment for adaptation investments."
-      },
-      {
-        "id": "aa259fd9e634433d",
-        "title": "Supporting financial inclusion of migrants: Actors, approaches and avenues to overcome challenges",
-        "date": "2022-03-28",
-        "url": "https://ecdpm.org/work/supporting-financial-inclusion-migrants-actors-approaches-avenues-overcome-challenges",
-        "authors": "[\"Pamella Ahairwe\", \"Amanda Bisong\"]",
-        "excerpt": "16  Table 4: Examples of public development actors that have made economic empowerment interventions.............. 17  Table 5: Examples of public development actors that have adopted gender-migrant specific interventions ............ 20  Table 6: Examples of public development actors that have adopted action-oriented partnerships .........................."
-      },
-      {
-        "id": "76d1393244c3d104",
-        "title": "The geopolitics of African renewable energy: European and Chinese investments in a global green transition",
-        "date": "2022-01-31",
-        "url": "https://ecdpm.org/work/geopolitics-african-renewable-energy-european-chinese-investments-global-green-transition",
-        "authors": "[\"Alfonso Medinilla\", \"Ennatu Domingo\", \"Katja Sergejeff\"]",
-        "excerpt": "With 46 African countries signed up to the BRI, and a total of $153 billion in loans committed to the continent  between 2000 and 2019 (CARI and BU 2021), there has been ample pressure on the EU (and US) to come up with an  alternative to the original alternative. The answer so far, however has been a mix between emulating certain  practices (e.g."
+        "id": "d5d6d1968baad198",
+        "title": "Strengthening the European financial architecture for development through better coordination",
+        "date": "2023-07-03",
+        "url": "https://ecdpm.org/work/strengthening-european-financial-architecture-development-better-coordination",
+        "authors": "[\"Karim Karaki\", \"San Bilal\"]",
+        "excerpt": "In parallel, increasing efforts are led by European development finance institutions (DFIs)  to collaborate with institutional investors such as pension funds and private insurers to mobilise private capital for  sustainable development impact at scale. This is for instance the case of the Danish SDG investment fund (Danida  2016) or the Dutch ILX fund (see Box 2) (ILX Fund n.a.)."
       }
     ],
     "odi": [
       {
-        "id": "b03f19a8720b77e0",
-        "title": "Building equitable social protection systems for a Sustainable Development Goal recovery: The case for a global ‘virtual financing’ mechanism",
-        "date": "2025-12-18",
-        "url": "https://odi.org/en/publications/building-equitable-social-protection-systems-for-a-sustainable-development-goal-recovery-the-case-for-a-global-virtual-financing-mechanism/",
-        "authors": "[\"Kevin Watkins\", \"Kathryn Nwajiaku-Dahou\", \"Cathal Long\", \"Marcus Manuel\", \"Andrea Sissa Velandia\", \"Caitlin Stronge\", \"Duncan Knox\"]",
-        "excerpt": "»  Restricting earmarking, allowing for more impact and value for money, and allowing smaller  contributors to attribute their investments to larger impacts than they could achieve bilaterally. This  was most evident in Ethiopia."
+        "id": "843d97dfbd9275ca",
+        "title": "Preferred creditor treatment and multilateral development banks’ mobilisation agenda",
+        "date": "2026-02-16",
+        "url": "https://odi.org/en/publications/preferred-creditor-treatment-and-multilateral-development-banks-mobilisation-agenda/",
+        "authors": "[\"Chris Humphrey\", \"Jessica Pudussery\", \"Frederique Dahan\"]",
+        "excerpt": "The section also  addresses MDB guarantees on sovereign loans and investments in  MDB share capital. 5.1 Risk transfers  MDBs have increasingly sought to manage their balance sheets and  catalyse new investment through risk transfers. These allow MDBs to  shift the risk of their loans not being repaid to third parties – private  insurers, investors or official donors – in return for a fee."
       },
       {
-        "id": "9a30d61e8f2271e3",
-        "title": "Leveraging the Sevilla Commitment in favour of Small Island Developing States",
-        "date": "2025-12-18",
-        "url": "https://odi.org/en/publications/leveraging-the-sevilla-comitment-in-favour-of-small-island-developing-states/",
-        "authors": "[\"Gail Hurley\", \"Emily Wilkinson\", \"Aditi Solanki\", \"Courtney Lindsay\", \"Matthew Bishop\", \"Rachid Bouhia\"]",
-        "excerpt": "Specifically, it: ‘welcomes and calls for support for the efforts of small island  developing States in establishing the Small Island Developing States Centre of Excellence, which  will include, inter alia, a biennial Island Investment Forum’ (paragraph 33(b)). While there were no  pledges of financial support, this nevertheless signals political commitment to the initiative."
+        "id": "bf2c3e24ca2a9ae7",
+        "title": "MDBs as an asset class",
+        "date": "2026-02-16",
+        "url": "https://odi.org/en/publications/mdbs-as-an-asset-class/",
+        "authors": "[\"Chris Humphrey\", \"Chris McHugh\"]",
+        "excerpt": "It offers mainly institutional investors like insurance firms    7 Several MDBs also offer parallel loans, in which the MDB helps arrange a financial package that includes  loans from other lenders with separate loan agreements directly with the borrower."
       },
       {
-        "id": "056b0410d297ed50",
-        "title": "The lives and livelihoods of internally displaced people in Baidoa, Somalia",
-        "date": "2025-12-11",
-        "url": "https://odi.org/en/publications/the-lives-and-livelihoods-of-internally-displaced-people-in-baidoa-somalia/",
-        "authors": "[\"Caitlin Sturridge\", \"Badra Yusuf\", \"Fatima Ali\", \"Federico Redin\", \"Lawrence Munga\", \"Salah Ilyas\", \"Peter Hailey\"]",
-        "excerpt": "(28-year-old IDP woman, displaced to Barwaaqo seven years ago) There is a lack of humanitarian support, limited job opportunities and very restricted access to  income. There is often no food to eat at home."
+        "id": "bc61f7cb6e4b48bb",
+        "title": "Country platforms in the context of rising sovereign debt levels",
+        "date": "2025-11-04",
+        "url": "https://odi.org/en/publications/country-platforms-in-the-context-of-rising-sovereign-debt-levels/",
+        "authors": "[\"Archie Gilmour\", \"Shandelle Steadman\", \"Amy Cano Prentice\", \"Sima Kammourieh\", \"Sarah Colenbrander\", \"Martin Kessler\"]",
+        "excerpt": "Equity is a transfer rewarded by co-ownership of the asset or company, and therefore the right  to receive a proportion of its revenues or profits once lenders have been repaid. Equity investors  face higher risks than debt investors because all loans must be repaid before they see any  returns – but they also do not have any limits to the possible returns in case of project success."
       },
       {
-        "id": "bdf9742bcc491b08",
-        "title": "Concessional but catalytic? Insights on DFI blended concessional finance practice",
-        "date": "2025-09-10",
-        "url": "https://odi.org/en/publications/concessional-but-catalytic-insights-on-dfi-blended-concessional-finance-practice/",
-        "authors": "[\"Samantha Attridge\", \"Frederique Dahan\", \"Bianca Getzel\"]",
-        "excerpt": "52  Appendix 2  BCF leverage ratios .................................................... 53  Appendix 3  Nine case studies ....................................................... 54  Case study 1: Renewable energy I .......................................................... 54  Case study 2: Renewable energy II ........................................................."
+        "id": "caf63c628265b1fa",
+        "title": "AfCFTA implementation challenges: towards an African continental textiles and apparel value chain",
+        "date": "2025-06-12",
+        "url": "https://odi.org/en/publications/afcfta-implementation-challenges-towards-an-african-continental-textiles-and-apparel-value-chain/",
+        "authors": "[\"Poorva Karkare\", \"Bruce Byiers\", \"Amanda Bisong\", \"Faizel Ismail\", \"Prachi Agarwal\", \"Christopher McKaige\"]",
+        "excerpt": ""
       },
       {
-        "id": "567d2d7edff15c09",
-        "title": "Implementing the AfCFTA Women and Youth Protocol in Ghana",
-        "date": "2025-08-19",
-        "url": "https://odi.org/en/publications/implementing-the-afcfta-women-and-youth-protocol-in-ghana/",
-        "authors": "[\"Prachi Agarwal\", \"Muhammed Abdulai\", \"Wilfred Essuman\"]",
-        "excerpt": "16)  Both focus on addressing and  eliminating structural barriers  that prevent certain groups  from fully participating in trade  and investment activities  Sustainable  development (Art. 2b)  Incentives for  sustainable  investments (Art. 8c)  Both acknowledge  sustainable development and  foster economic sustainability."
-      },
-      {
-        "id": "2389a14bc916cf19",
-        "title": "Lessons from the Russia–Ukraine war: assessing the resilience of African economies to external shocks",
-        "date": "2025-04-30",
-        "url": "https://odi.org/en/publications/lessons-from-the-russia-ukraine-war-assessing-african-economies-resilience-to-external-shocks/",
-        "authors": "[\"Sherillyn Raga\", \"Phyllis Papadavid\", \"Jorge D\\u00e1valos\", \"Marzia Fontana\", \"Martin Henseler\", \"Miguel Jaramillo\", \"Kenneth Kigundu\", \"H\\u00e9l\\u00e8ne Maisonnave\", \"Lanoi Maloiy\", \"Dianah Ngui\", \"Abebe Shimeles\", \"Dirk Willem te Velde\", \"Dickson Wandeda\", \"Ganeshan Wignaraja\", \"Chahir Zaki\"]",
-        "excerpt": "Any further delays in climate policy actions and mobilisation of climate finance  are particularly concerning; this will make the continent less resilient too: climate  change is already affecting 52% of African countries and 110 million people, and  cost $8.5 billion in economic damages in 2022 (AU et al., 2024). 3."
-      },
-      {
-        "id": "492d9d602db20bf3",
-        "title": "Engines of growth: Building knowledge economies in SIDS",
-        "date": "2025-03-10",
-        "url": "https://odi.org/en/publications/engines-of-growth-building-knowledge-economies-in-sids/",
-        "authors": "[\"Dr. Preeya Mohan\", \"Courtney Lindsay\", \"Jaymieon Jagessar\", \"Jakob Habsburg\"]",
-        "excerpt": "Its focus on  research, innovation and technology as a means for future development of SIDS, and calls for  support in efforts to establish a Centre of Excellence that will include a technology and innovation  mechanism, demonstrate SIDS’ intentions to develop knowledge economies."
-      },
-      {
-        "id": "0aef4f6e368bf420",
-        "title": "One size won't fit all: Designing country platforms for different political contexts",
-        "date": "2024-03-28",
-        "url": "https://odi.org/en/publications/one-size-wont-fit-all-designing-country-platforms-for-different-political-contexts/",
-        "authors": "[\"Tim Kelsall\", \"Sarah Colenbrander\", \"Nick Simpson\"]",
-        "excerpt": "Together with its investments in other  parts of the energy sector, including oil, gas and mines, it is likely to play a key role in dictating the  pace of the energy transition. Investments in oil and gas continue to yield good returns, particularly since the Russian invasion  of Ukraine."
+        "id": "166c72fefbf8b3d7",
+        "title": "Trillions or billions? Reassessing the potential for European institutional investment in emerging markets and developing economies",
+        "date": "2024-05-22",
+        "url": "https://odi.org/en/publications/trillions-or-billions-reassessing-the-potential-for-european-institutional-investment-in-emerging-markets-and-developing-economies/",
+        "authors": "[\"Samantha Attridge\", \"Bianca Getzel\", \"Neil Gregory\"]",
+        "excerpt": "To start to answer this question, it is necessary to move to a more granular level of understanding  by investor type and market given the heterogeneity of investors, pension and insurance markets. We focus our analysis on the European market, which manages 25.7% of total assets under  management by institutional investors worldwide (BCG, 2021)."
       },
       {
         "id": "efde8c670a5d3ded",
@@ -99,39 +59,71 @@
         "date": "2023-12-14",
         "url": "https://odi.org/en/publications/hedging-belts-de-risking-roads-sinosure-in-chinas-overseas-finance-and-the-evolving-international-response/",
         "authors": "[\"Yunnan Chen\", \"Zongyuan Zoe Liu\"]",
-        "excerpt": "Reforms in development finance and export credit regimes are underway, and seek to better  compete with China’s official finance. As a consequence, this has also narrowed the space between  the mandates and instruments of national DFIs and ECAs."
+        "excerpt": "First, sufficient  capitalisation and institutional capacity is critical in  mobilising financing at scale, but also in ensuring  the capacity and institutional autonomy to assess  and bear risk and mitigate potential moral hazard."
       },
       {
-        "id": "0ac7a1624d038d3f",
-        "title": "MSME-led private sector development in contexts of conflict, fragility and displacement",
-        "date": "2022-10-19",
-        "url": "https://odi.org/en/publications/msme-led-private-sector-development-in-contexts-of-conflict-fragility-and-displacement/",
-        "authors": "[\"Alastair McKechnie\", \"Kathryn Nwajiaku-Dahou\", \"Sherillyn Raga\", \"Mark van Dorp\", \"Donata Garrasi\", \"Ben Miller\", \"Leigh Mayhew\", \"Joseph Feyertag\", \"Camilla Sacchetto\", \"Ibifuro Joy Alasia\"]",
-        "excerpt": "(2016) ‘Growing or Coping? Evidence from small and  medium sized enterprises in fragile settings. CRU report. Clingendael  (https://www.clingendael.org/pub/2016/growing_or_coping/). Holmes, R., McCord, A. and Hagen-Zanker, J. with Bergh, G. and Zanker, F. (2013) What is the evidence on the impact of employment creation on  stability and poverty reduction in fragile states? – a systematic review."
+        "id": "a492625b8fcdc293",
+        "title": "Making sense of hybrid capital for multilateral banks",
+        "date": "2023-11-14",
+        "url": "https://odi.org/en/publications/making-sense-of-hybrid-capital-for-multilateral-banks/",
+        "authors": "[\"Chris Humphrey\", \"Chris McHugh\", \"Eamonn White\"]",
+        "excerpt": "The World Bank’s  main lending wing is developing a version to be offered to  shareholder governments in an initial phase and has Board approval  for a pilot hybrid for commercial investors (World Bank, 2023a)."
       },
       {
-        "id": "63fbdd1998b4ae37",
-        "title": "Social protection and forcibly displaced people: a literature review",
-        "date": "2021-12-14",
-        "url": "https://odi.org/en/publications/social-protection-and-forcibly-displaced-people-a-literature-review/",
-        "authors": "[\"Amanda Gray Meral\", \"Nathalie Both\"]",
-        "excerpt": "/  24 Box 6 Inclusion of refugees in state responses to Covid-19: the example of Colombia  /  25 Box 7 Other factors influencing the feasibility of inclusion approaches  /  26 Box 8 International humanitarian Covid-19 responses for refugees and state responses: the  example of Pakistan  /  32 Box 9 International humanitarian actors and the national social protection response to Covid-19 in  Jordan…"
+        "id": "e1a863c065d73d24",
+        "title": "Bridging Africa’s urban infrastructure gap: Financial intermediaries for facilitating cities’ access to debt finance in Africa",
+        "date": "2023-08-31",
+        "url": "https://odi.org/en/publications/bridging-africas-urban-infrastructure-gap-financial-intermediaries-for-facilitating-cities-access-to-debt-finance-in-africa/",
+        "authors": "[\"Gundula L\\u00f6ffler\", \"Astrid Haas\"]",
+        "excerpt": "According to experts, the most developed financial markets on the  continent are in South Africa and the West African Economic and Monetary Union (WAEMU),  with its joint currency backed by the French treasury (Habeau, interview, 2023; Machano,  interview, 2023; Painter, interview, 2023)."
       },
       {
-        "id": "8b2c906536d53d3a",
-        "title": "Impact assessment for market-building interventions in capital markets: Review, critiques and improvements",
-        "date": "2021-05-28",
-        "url": "https://odi.org/en/publications/impact-assessment-for-market-building-interventions-in-capital-markets-review-critiques-and-improvements/",
-        "authors": "[\"Judith Tyson\", \"Sherillyn Raga\"]",
-        "excerpt": "Impact assessment for market- building interventions in capital  markets: Review, critiques and  improvements    The ODI research series for financial development in Africa  Issouf Soumaré, Désiré Kanga and Judith Tyson   May 2021    Abstract    To develop African capital markets and increase financial inclusion, specific  interventions have been introduced to better design policies and programmes…"
+        "id": "98d8217416a1b3c7",
+        "title": "An exploration of bilateral development finance institutions’ business models",
+        "date": "2022-12-06",
+        "url": "https://odi.org/en/publications/an-exploration-of-bilateral-development-finance-institutions-business-models/",
+        "authors": "[\"Samantha Attridge\", \"Christian Novak\"]",
+        "excerpt": "The DFIs remain  the ‘lender of records’ in these structures, benefiting the borrowers and the FIs and  investors, reducing risks (given the DFIs' ‘preferred creditor treatment’ in most cases)  and resulting in withholding tax savings, among other benefits."
       },
       {
-        "id": "47efd0cdae98cc7d",
-        "title": "Capital Market Development in Sub-Saharan Africa",
-        "date": "2021-05-28",
-        "url": "https://odi.org/en/publications/capital-market-development-in-sub-saharan-africa/",
+        "id": "1e45e86fd6d2542b",
+        "title": "Risks along the Belt and Road: Chinese investment and infrastructure development priorities in Kyrgyzstan",
+        "date": "2022-11-01",
+        "url": "https://odi.org/en/publications/risks-along-the-belt-and-road-chinese-investment-and-infrastructure-development-priorities-in-kyrgyzstan/",
+        "authors": "[\"Olena Borodyna\", \"Linda Calabrese\", \"Rebecca Nadin\"]",
+        "excerpt": "Chinese financial institutions have stepped in to  provide part of that finance via infrastructure lending. China is also an investor in Central Asia. Both  private businesses and state-owned enterprises  (SOEs) invest in many sectors in the region, from  agriculture to manufacturing, extractives and  services."
+      },
+      {
+        "id": "518dd44afcd63ce1",
+        "title": "Capital markets for cities",
+        "date": "2022-06-21",
+        "url": "https://odi.org/en/publications/capital-markets-for-cities/",
         "authors": "[\"Judith Tyson\"]",
-        "excerpt": "3.2 New investor classes  The investor landscape has become significantly more diversified. Investors with rising importance include specialists such as socially  responsible investors, green investors, regional and international  sovereign wealth funds and crowdfunding platforms. These new investors’ asset preferences and investment horizons are  compatible with the policy goals of the region."
+        "excerpt": "Similarly, there are private funds that are not themselves listed, but that support primary issues  in listed capital market instruments. For example, the Africa Local Currency Bond Fund is a  private fund that invests in new issues of listed local currency corporate bonds on African stock  exchanges."
+      },
+      {
+        "id": "0cfc9804a52be688",
+        "title": "Risks along the Belt and Road: Chinese investment and infrastructure development in Cambodia",
+        "date": "2022-04-29",
+        "url": "https://odi.org/en/publications/risks-along-the-belt-and-road-chinese-investment-and-infrastructure-development-in-cambodia/",
+        "authors": "[\"Linda Calabrese\", \"Olena Borodyna\", \"Rebecca Nadin\"]",
+        "excerpt": "Chinese financial institutions have stepped in to  provide part of that finance via infrastructure lending. China is also an investor in Central Asia. Both  private businesses and state-owned enterprises  (SOEs) invest in many sectors in the region, from  agriculture to manufacturing, extractives and  services."
+      },
+      {
+        "id": "f6b8a78d85cd71bc",
+        "title": "China in the multilateral development banks: evolving strategies of a new power",
+        "date": "2021-09-27",
+        "url": "https://odi.org/en/publications/china-multilateral-development-banks/",
+        "authors": "[\"Chris Humphrey\", \"Yunnan Chen\"]",
+        "excerpt": "In all the MDBs, China invariably aligns with the  positions of the borrowing countries against  other donors, reflecting broader norms around  South–South cooperation – even in the many  MDBs where China is a creditor rather than a  borrower shareholder."
+      },
+      {
+        "id": "f579d3c65c096a15",
+        "title": "Financial-sector development and inclusive and sustainable economic growth in sub-Saharan Africa",
+        "date": "2021-05-28",
+        "url": "https://odi.org/en/publications/financial-sector-development-and-inclusive-and-sustainable-economic-growth-in-sub-saharan-africa/",
+        "authors": "[\"Judith Tyson\"]",
+        "excerpt": "Critical in this respect are domestic and international institutional investors  who hold vast pools of long-term capital, which, if it was tapped, could be an ideal  source of capital for the region. In examining how companies could be brought to    DRAFT – not for circulation. Working Paper 1: “Financial-sector development and inclusive and sustainable economic growth  in sub-Saharan Africa”."
       },
       {
         "id": "48ee57e88775eb33",
@@ -139,15 +131,7 @@
         "date": "2021-05-28",
         "url": "https://odi.org/en/publications/capital-market-development-in-sub-saharan-africa-progress-challenges-and-innovations/",
         "authors": "[\"Judith Tyson\", \"Sherillyn Raga\"]",
-        "excerpt": "Demutualisation is supposed to improve  liquidity and respond quickly to the needs of the market, unimpeded by member  committees and their diverse interests (Abukari and Otchere, 2020). It also gives  access to capital markets for fundraising. Being publicly quoted also gives exchanges  and their management a clearer idea of their worth."
-      },
-      {
-        "id": "a437b1a576caf28c",
-        "title": "Green bonds in sub-Saharan Africa",
-        "date": "2021-05-28",
-        "url": "https://odi.org/en/publications/green-bonds-in-sub-saharan-africa/",
-        "authors": "[\"Judith Tyson\"]",
-        "excerpt": "The joint FSD Africa-ODI research program - Policy Brief 3      6  Nedbank   1662   ZAR   116.7    Financial  Institution     South  Africa   2019    Energy   North South  Power      8500   NGN   23.5   Corporate    Nigeria   2019    -   Access Bank   15000    NGN   41.5   Financial  Institution     Nigeria   2019    -   Bank of  Windhoek   66   NAD   4.6   Financial  Institution   Namibia   2018…"
+        "excerpt": "Corporate bonds constitute a tiny part of the  capital markets in most African countries. Despite this under-development, there is  still huge potential for market expansion given both the financial development gap  and the huge infrastructure development gap in Africa."
       },
       {
         "id": "4211544a12849bd9",
@@ -155,81 +139,7 @@
         "date": "2021-04-26",
         "url": "https://odi.org/en/publications/new-shareholders-for-multilateral-banks-a-viable-approach-to-increase-development-finance/",
         "authors": "[\"Chris Humphrey\"]",
-        "excerpt": "It has been  cross-read and edited but the usual rigorous processes have not  necessarily been applied. ODI Emerging analysis      3 Acknowledgements  This paper has been prepared with the generous support of the Bill &  Melinda  Gates Foundation."
-      }
-    ],
-    "saiia": [
-      {
-        "id": "6b46144bd3bdecfc",
-        "title": "The Just Transition Agenda Under South Africa’s G20 Presidency",
-        "date": "2025-11-10",
-        "url": "https://saiia.org.za/research/the-just-transition-agenda-under-south-africas-g20-presidency/",
-        "authors": "[\"Mark Swilling\"]",
-        "excerpt": "Giraud, “Why Microeconomic Policies Cannot Work If Macroeconomic Policies Are Wrong”, Daily Maverick, 5  September 2019, https://www.dailymaverick.co.za/article/2019-09-05-why-microeconomic-policies-cannot-work-if- macroeconomic-policies-are-wrong/. 61 Murau, Haas and Guter-Sandu, “Monetary Architecture and the Green Transition,” 382–401."
-      },
-      {
-        "id": "5cdf6ad73b4ef82d",
-        "title": "Digging Deeper: Embedding Minerals Sovereignty in Africa’s Mining Value Chains",
-        "date": "2025-02-18",
-        "url": "https://saiia.org.za/research/digging-deeper-embedding-minerals-sovereignty-in-africas-mining-value-chains/",
-        "authors": "[\"Letitia Jentel\", \"Deon Cloete\"]",
-        "excerpt": "Structural inequities in global economic governance, including the limited  capacity to pursue context-appropriate energy strategies, further trap the  continent in economic stagnation Economic sovereignty depends on mineral and energy sovereignty and is  critical for Africa’s development   4 Policy Insights 161  |  DIGGING DEEPER: EMBEDDING MINERALS SOVEREIGNTY IN AFRICA’S MINING VALUE CHAINS…"
-      },
-      {
-        "id": "c1d81f6072d54d0f",
-        "title": "Evaluating Macroeconomic Resilience: The Case of South Africa and Botswana",
-        "date": "2024-11-22",
-        "url": "https://saiia.org.za/research/evaluating-macroeconomic-resilience-the-case-of-south-africa-and-botswana/",
-        "authors": "[\"Conrad van Gass\", \"Santos Bila\", \"Neuma Grobbelaar\"]",
-        "excerpt": "Correspondingly, the South African  Reserve Bank has presided over an increase in all components of its reserves (foreign currency,  gold and IMF holdings) as a proportion of GDP and their reflection in the months of import cover  which have shown an increase from 2.2 months in 2002 to 5.4 months in 2022."
-      },
-      {
-        "id": "f0326aabae04857d",
-        "title": "Global Markers in South Africa’s Just Energy Transition",
-        "date": "2023-12-06",
-        "url": "https://saiia.org.za/research/global-markers-in-south-africas-just-energy-transition/",
-        "authors": "[\"Mark Swilling\", \"Merin Raju Jacob\", \"Wendy McCallum\", \"Nichola Richards\", \"Deon Cloete\", \"Letitia Jentel\"]",
-        "excerpt": "98\t “Energy,” Development Bank of Southern Africa, https://www.dbsa.org/sectors/energy. 99\t Government of South Africa, The Presidency, “South Africa’s Just Energy Transition,” 125. 100\t Government of South Africa, The Presidency, “South Africa’s Just Energy Transition Investment Plan,” 123."
-      },
-      {
-        "id": "d6c2399cb2fd3f45",
-        "title": "Catalysing Sustainable Finance for the African Regional Infrastructure Agenda",
-        "date": "2022-09-06",
-        "url": "https://saiia.org.za/research/catalysing-sustainable-finance-for-the-african-regional-infrastructure-agenda/",
-        "authors": "[\"Chelsea Markowitz\"]",
-        "excerpt": "19 Policy Insights 136  |  CATALYSING SUSTAINABLE FINANCE FOR THE AFRICAN REGIONAL INFRASTRUCTURE AGENDA  In February 2022 at the 6th AU Summit, the AfDB proposed the establishment of the  Alliance for Green Infrastructure in Africa (the Alliance)44 in partnership with Africa50, the  AU Commission and the AU Development Agency (AUDA) for the purpose of supporting  investment in green and sustainab…"
-      },
-      {
-        "id": "054105ab81c1f071",
-        "title": "Why Regional Value Chains in Africa Need to go Digital",
-        "date": "2021-10-18",
-        "url": "https://saiia.org.za/research/why-regional-value-chains-in-africa-need-to-go-digital/",
-        "authors": "[\"Michelle Chivunga\", \"Alastair Tempest\"]",
-        "excerpt": "∙∙ Take advantage of the accelerating pace of digitalisation (which has been fuelled by the  COVID pandemic) to enhance and expand production in various sectors across RVCs. ∙∙ Formulate clear and well-informed rules and harmonise standards to facilitate more  (and more efficient) cross-border trade and establish a clear dispute-resolution  framework for regional and/or continent-wide application.…"
-      },
-      {
-        "id": "4a873fa3940b6240",
-        "title": "Cameroon’s Separatist War: Anglophone Grievances and its Diaspora",
-        "date": "2021-09-01",
-        "url": "https://saiia.org.za/research/cameroons-separatist-war-anglophone-grievances-and-its-diaspora/",
-        "authors": "[\"Rogers Orock\"]",
-        "excerpt": "12\t See Rogers Orock, ‘Encountering Cameroon’s Garrison State: Checkpoints, Democratic Aspirations, and the Anglophone Revolt,’  WISH Seminar, Wits Institute for Social and Economic Research (WiSER), February 17, 2020, https://wiser.wits.ac.za/system/files/ seminar/Orock2020.pdf."
-      },
-      {
-        "id": "8efb1dfc16c4dd20",
-        "title": "Vaccine Diplomacy and Beyond: New Trends in Chinese Image-Building in Africa",
-        "date": "2021-07-22",
-        "url": "https://saiia.org.za/research/vaccine-diplomacy-and-beyond-new-trends-in-chinese-image-building-in-africa/",
-        "authors": "[\"Cobus van Staden\", \"Yu-Shan Wu\"]",
-        "excerpt": "Ma was already a key figure in Chinese public  diplomacy in Africa before the pandemic, leading a high-profile competition dedicated  to finding emergent African technology entrepreneurs.22 His reported friendship with  Rwandan President Paul Kagame and his frequent visits to the continent positioned Ma  as a prominent representative of China’s emerging influence in Africa."
-      },
-      {
-        "id": "9cfbb318aeae174b",
-        "title": "Chinese International Contractors in Africa: Structure and Agency",
-        "date": "2021-05-01",
-        "url": "https://saiia.org.za/research/chinese-international-contractors-in-africa-structure-and-agency/",
-        "authors": "[\"China Africa Research Initiative\"]",
-        "excerpt": "刘琳, “‘大海外’战略布局谋篇——访中国建筑股份有限公司副总裁刘锦章 (Strategic Deployment for 'Big Overseas'--Interview with Vice  President Liu Jinzhang of China State Construction Engineering Corporation),” 国际工程与劳务(International Project Contracting and  Labor Service), no. 8 (2013): 41–44. 36. 朱杰 and 任超锋, “中国金融支持企业‘走出去’的研究与探讨(Research on China's Financial Support for Companies 'Going out'),” 全 球化, no. 12 (2016): 93–104. 37."
+        "excerpt": "Second, share capital could attract institutional investors looking for an  aggregate investment platform that does not require analysing  individual projects. Third, MDBs could continue their traditional focus  on long-term developmental impact, not short-term financial returns to  investors."
       }
     ],
     "tips": [
@@ -239,147 +149,25 @@
         "date": "2024-04-18",
         "url": "https://tips.org.za/policy-briefs/item/4754-growing-the-start-up-economy-in-south-africa-accelerating-local-and-foreign-investment",
         "authors": "[\"David Kaplan\"]",
-        "excerpt": "They do so by introducing  novelty. They are the seeds of new entrants and   so enhance competition. Many of today’s large   successful companies began life as start-ups. Poverty  Technology based start-ups cover a wide area."
-      },
-      {
-        "id": "cff3ea3419405791",
-        "title": "Water and Sanitation Industry Master Plan",
-        "date": "2022-10-17",
-        "url": "https://tips.org.za/research-archive/trade-and-industry/item/4443-water-and-sanitation-industry-master-plan",
-        "authors": "[\"Gaylor Montmasson-Clair\", \"Gillian Chigumira\", \"Daryl McLean\", \"Sandra Makumbirofa\"]",
-        "excerpt": "Table 6: Foundries in South Africa  PROVINCE   2003  2007  2015  Gauteng   110  108  114  KwaZulu-Natal   20  26  20  Western Cape   26  16  4  Eastern Cape  16  10  8  Free State   10  7  5  North West   10  9  4  Northern Cape   6  3  3  Mpumalanga   15  15  2  Total   213  194  160  Source: SAIF, 2015. Foundries are crucial in the manufacturing of valves and other steel products."
-      },
-      {
-        "id": "1243d2f87311ff89",
-        "title": "Regional value chains and industrialisation: the Southern African experience",
-        "date": "2021-10-23",
-        "url": "https://tips.org.za/research-archive/external-journals/item/4240-transforming-southern-africa-harnessing-regional-value-chains-and-industrial-policy-for-development",
-        "authors": "[\"Saul Levin and Neva Makgetla (TIPS)\"]",
-        "excerpt": "Zambia’s largest foundry was the Non-Ferrous Metalworks (Zambia), which was founded in the  1960s and had over 50 workers in the mid-2010s. (Non-Ferrous Metalworks (Z) 2019) The foundries  experienced an upsurge when the commodity boom revitalised Zambian mining, but times were  harder from 2011."
-      },
-      {
-        "id": "1b8f0da86d655bc3",
-        "title": "The coal value chain in South Africa",
-        "date": "2021-07-22",
-        "url": "https://tips.org.za/research-archive/trade-and-industry/item/4161-the-coal-value-chain-in-south-africa",
-        "authors": "[\"Neva Makgetla\", \"Muhammed Patel (TIPS)\"]",
-        "excerpt": "As a result, the share of coal in mining  employment climbed from a tenth at the start of the 21st Century to a fifth in the late 2010s. South Africa had around 150 coal mines in 2020. Six companies, half of them foreign owned,  accounted for three quarters of production."
-      },
-      {
-        "id": "fa4fe838c8172cc0",
-        "title": "The African Continental Free Trade Area (AfCFTA) and Developmental Regionalism: A Handbook",
-        "date": "2021-05-27",
-        "url": "https://tips.org.za/research-archive/books/item/4121-the-african-continental-free-trade-area-afcfta-and-developmental-regionalism-a-handbook",
-        "authors": "[\"Faizel Ismail\"]",
-        "excerpt": "A study on how domestic resources can be  mobilised to fund Africa’s infrastructure  priorities was mandated by NEPAD HSGOC  and conducted by the NEPAD Agency, in  collaboration with the UNECA (UNECA,  2017)."
+        "excerpt": "The bulk of the assets of the South African financial  sector are in banking, but pension funds and insurers  The bulk of funding for start-ups elsewhere in Africa is from foreign sources. In contrast with other African countries South African start-ups are   largely locally funded. 5  transition in energy – its two social impact objectives  (Sukha, 2023)."
       }
     ],
     "policy_center": [
       {
-        "id": "117adc4ed44d73b8",
-        "title": "Tripartite Gulf Power: The Diverging Geoeconomics of Saudi Arabia, the UAE, and Qatar, and the Implications for MENA and the Global Order",
-        "date": "2026-03-13",
-        "url": "https://www.policycenter.ma/publications/tripartite-gulf-power-diverging-geoeconomics-saudi-arabia-uae-and-qatar-and",
-        "authors": "[\"Ferid Belhaj\"]",
-        "excerpt": "Maintaining oil capacity while investing  aggressively in renewables, nuclear, and low-carbon technologies allows Abu Dhabi to speak  the language of both incumbency and transition. This duality enhances its credibility across  Europe, Asia, and the Global South."
+        "id": "c2880d891de95aa9",
+        "title": "THE REFORM OF THE GLOBAL FINANCIAL ARCHITECTURE: Toward a System that Delivers for the South",
+        "date": "2024-04-25",
+        "url": "https://www.policycenter.ma/publications/reform-global-financial-architecture-toward-system-delivers-south",
+        "authors": "[\"St\\u00e9phane Le Bouder\", \"Otaviano Canuto\", \"Hafez Ghanem\", \"Youssef El Jai\"]",
+        "excerpt": "Importantly, these institu­ tions and their shareholders have a permanent commitment to  the continent and capital allocated specifically for investment  in the region, including in hard-to-reach countries and markets. Also key to their capacity is the extensive physical presence  and staff in nearly every country on the continent."
       },
       {
-        "id": "8666347ce7828d0d",
-        "title": "Beyond Aid - A Wake-Up Call for Development Cooperation Tough but Timely",
-        "date": "2025-10-01",
-        "url": "https://www.policycenter.ma/publications/beyond-aid-wake-call-development-cooperation-tough-timely",
-        "authors": "[\"Len Ishmael\"]",
-        "excerpt": "In 2015, amidst talk of donor fatigue,  the Addis Ababa Summit on Financing for Development focused on instruments to leverage billions  in additional financing for development through the private sector, while also highlighting the  role in supporting development of domestic resource mobilization through enhanced taxation and  8."
-      },
-      {
-        "id": "c9e0e9566199af15",
-        "title": "De-Dollarization, Local Currencies, And External Financial Defense",
-        "date": "2025-08-19",
-        "url": "https://www.policycenter.ma/publications/de-dollarization-local-currencies-and-external-financial-defense",
-        "authors": "[\"Otaviano Canuto\"]",
-        "excerpt": "Third, non-traditional currencies were for a time favored by a partial search for returns in reserve  management. The central bank balance sheets of advanced and emerging economies have taken on  enormous proportions in the new millenium7."
-      },
-      {
-        "id": "37bc3f6f4467cac3",
-        "title": "Achieving Food Security in Africa: What Prospects Lie Ahead?",
-        "date": "2025-04-02",
-        "url": "https://www.policycenter.ma/publications/achieving-food-security-africa-what-prospects-lie-ahead",
-        "authors": "[\"Isabelle Tsakok\"]",
-        "excerpt": "In 1951, the Treaty of Paris established the ECSC; in 1957, the Treaty of Rome established the European Economic Community (EEC). The  European Union was officially created by the Maastricht Treaty on February 2, 1992. It came into force on November 1, 1993. 34."
-      },
-      {
-        "id": "35cd4768857d90fa",
-        "title": "The Water-Energy Nexus: The Path to Solving the Water Crisis in the Middle East and North Africa",
-        "date": "2025-03-21",
-        "url": "https://www.policycenter.ma/publications/water-energy-nexus-path-solving-water-crisis-middle-east-and-north-africa",
-        "authors": "[\"Ferid Belhaj\"]",
-        "excerpt": "\u0007FINANCING THE FUTURE: MOBILIZING $500  BILLION To bridge the financing gap, MENA must leverage a mix of public and private capital. Potential funding mechanisms include: Public and Private Financing Mechanisms 1. Public-Private Partnerships (PPPs): Attracting private investors to finance renewable- powered water projects."
-      },
-      {
-        "id": "6190ee44fa5fe506",
-        "title": "Morocco-India Partnership: Field of Strength to be Explored",
-        "date": "2024-09-30",
-        "url": "https://www.policycenter.ma/publications/morocco-india-partnership-field-strength-be-explored",
-        "authors": "[\"Mariam Ait Merri\", \"Abdessalam Saad Jaldi\"]",
-        "excerpt": "In that sense, India was always bringing the concept of South-South Cooperation to its agendas of  discussion, especially with North African states.8 1.2\t From 1991 to 2015: A Realist Relations Following the initial establishment of diplomatic relations, India's relationship with Morocco  did not exhibit any distinct characteristics that set it apart from its interactions with other North  African…"
-      },
-      {
-        "id": "d8ba26dcb64e7f5a",
-        "title": "Migration dynamics in the Atlantic basin: Case Studies from Morocco and Nigeria",
-        "date": "2024-07-02",
-        "url": "https://www.policycenter.ma/publications/migration-dynamics-atlantic-basin-case-studies-morocco-and-nigeria",
-        "authors": "[\"Constance Berry Newman\", \"Amal El Ouassif\"]",
-        "excerpt": "That nonprofit  organization’s mission is to provide an effective and unified  platform for Chicago-based members of the Nigerian dias- pora to harness their talents, expertise, and resources to aid  in Chicago’s economic and social development."
-      },
-      {
-        "id": "873a85b8cfa555d9",
-        "title": "The U.S. dollar’s “exorbitant privilege” remains",
-        "date": "2023-04-27",
-        "url": "https://www.policycenter.ma/publications/us-dollars-exorbitant-privilege-remains",
-        "authors": "[\"Otaviano Canuto\"]",
-        "excerpt": "In addition, no other monetary system offers an equivalent volume of “investment-grade”  government bonds as the United States does. That volume allows central banks to accumulate  reserves and private investors to use them as a “haven”, something reinforced by the  “quantitative easing” since the global financial crisis."
-      },
-      {
-        "id": "5aa6a413bc497143",
-        "title": "The Russia-Ukraine War: Implications for Africa",
-        "date": "2022-03-22",
-        "url": "https://www.policycenter.ma/publications/russia-ukraine-war-implications-africa",
-        "authors": "[\"Hisham Aidi\"]",
-        "excerpt": "Similarly, Washington’s erstwhile allies have been relatively restrained in voicing opposition  to Russian policy in the Middle East. Saudi Arabia, for instance, spurned the Biden  Administration’s request to pump more oil to calm rising oil prices. The United Arab  3. https://www.ft.com/content/74089d46-abb8-4daa-9ee4-e9e9e4c45ab1 4."
-      },
-      {
-        "id": "5cad75b76b727dca",
-        "title": "Risk Mitigation Tools to Crowd in Private Investment in Green Technologies",
-        "date": "2021-09-29",
-        "url": "https://www.policycenter.ma/publications/risk-mitigation-tools-crowd-private-investment-green-technologies",
-        "authors": "[\"Raffaele Della Croce\", \"Miguel Vazquez\", \"Mahmoud Arbouch\", \"Otaviano Canuto\", \"Karim El Aynaoui\", \"Youssef El Jai\"]",
-        "excerpt": "The coverage of rural roads went from 54 per cent in 2005 to  80 per cent in 2017. This project was piloted by the Moroccan Ministry for Equipment and  Transportation, and financed by MDBs, especially the World Bank. A survey held by the lat- ter institution showed that the project helped increase girls’ access to basic education by  7.4 per cent. 2."
-      }
-    ],
-    "acet": [
-      {
-        "id": "4c5a253f7c78b6ad",
-        "title": "Reducing Non-Tariff Barriers to AfCFTA Implementation in the Cotton, Textiles, and Apparel Industry",
-        "date": "2025-08-28",
-        "url": "https://acetforafrica.org/research-and-analysis/reports-studies/reports/reducing-non-tariff-barriers-to-afcfta-implementation-in-the-cotton-textiles-and-apparel-industry/",
-        "authors": "[\"George Boateng\"]",
-        "excerpt": "Garment-assembly lines located within SEZs near the ports of Tema,  Takoradi, Adijan, and Cotonou will shorten lead times for AfCFTA and global shipments. Within  these facilities, Ghana’s established expertise in fabric printing and African-print design, linked  with Côte d’Ivoire’s artisanal dye studios can guide product differentiation."
-      },
-      {
-        "id": "957902ba77d86a70",
-        "title": "African Central Banks and the Challenges of Economic Transformation",
-        "date": "2025-04-15",
-        "url": "https://acetforafrica.org/research-and-analysis/reports-studies/reports/african-central-banks-and-the-challenges-of-economic-transformation/",
-        "authors": "[\"Celestin Monga\"]",
-        "excerpt": "The diagnostic of the Bretton Woods institution was simple, and perhaps too  much so: the unsustainable macroeconomic imbalances confronting Africa at that time were  due to the “subordination” of monetary policy to the objective of financing large government  deficits, which led to high inflation and, in combination with fixed exchange rates, overvalued  real exchange rates."
-      },
-      {
-        "id": "696bc1c9f1a23000",
-        "title": "International Finance Reforms: Accelerating Investment and Driving Climate-Positive Green Industrialization in Africa",
-        "date": "2024-09-09",
-        "url": "https://acetforafrica.org/research-and-analysis/insights-ideas/policy-briefs/international-finance-reforms-accelerating-investment-and-driving-climate-positive-green-industrialization-in-africa/",
-        "authors": "[\"Bayo Oyewole\", \"Rob Floyd\"]",
-        "excerpt": "There was a recognition that the African financial architecture is not fully understood, particularly  when taking into account national development banks, commercial banks and sub-regional financial  organizations. Reforms across this continental architecture could lower the cost and diversify the  sources of financing for the continent, particularly for green industrialization."
+        "id": "a43d4a039fba5e40",
+        "title": "India–East Africa A Not So Healthy Relationship?",
+        "date": "2022-03-07",
+        "url": "https://www.policycenter.ma/publications/india-east-africa-not-so-healthy-relationship",
+        "authors": "[\"Isabelle Saint-M\\u00e9zard\", \"Fran\\u00e7oise Nicolas\"]",
+        "excerpt": "Indian companies seeking to venture abroad make their decisions  based on their own interests and resorting to their own resources, but they  may also get support from India’s Exim Bank in the form of loans and  guarantees as well as equity finance. In some cases, Exim Bank has direct  participation in equity along with Indian promoters."
       }
     ]
   }

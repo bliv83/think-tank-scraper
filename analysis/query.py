@@ -218,31 +218,166 @@ def gap_analysis() -> dict:
     }
 
 
+def semantic_gap_analysis(
+    similarity_threshold: float = 0.55,
+    min_chunks: int = 2,
+) -> dict:
+    """
+    Measure *substantive* thematic engagement using semantic similarity.
+
+    A publication counts only if ≥ min_chunks of its text chunks score
+    ≥ similarity_threshold cosine similarity to the theme description.
+
+    Cell values include both absolute count and relative % of each source's
+    total output, so large and small think tanks are fairly comparable.
+
+    Returns:
+        matrix         — {theme_id: {source: {count, pct, total}}}
+        pub_sets       — {(theme_id, source): set of pub_ids}
+        theme_vecs     — {theme_id: embedding vector} for excerpt selection
+        source_totals  — {source: total_english_publications}
+        gaps / near_gaps / coverage_pct — same as gap_analysis()
+        params         — {similarity_threshold, min_chunks}
+    """
+    from pipeline.db import get_db
+
+    themes      = get_all_themes()
+    source_keys = list(SOURCES.keys())
+    collection  = _get_collection()
+    db          = get_db()
+
+    # ── Total English publications per source (denominator) ──────────────────
+    source_totals: dict[str, int] = {}
+    for src in source_keys:
+        row = db.execute(
+            "SELECT COUNT(*) FROM publications WHERE source = ? AND language = 'en'",
+            [src],
+        ).fetchone()
+        source_totals[src] = row[0] if row else 0
+    print(f"Source totals (English pubs): { {k: v for k, v in source_totals.items()} }", flush=True)
+
+    # ── Embed theme descriptions ─────────────────────────────────────────────
+    print("Embedding theme descriptions…", flush=True)
+    theme_vecs: dict[str, list[float]] = {}
+    for theme in themes:
+        theme_vecs[theme.id] = _embed_query(theme.description)
+    print(f"  {len(theme_vecs)} theme embeddings done.", flush=True)
+
+    # ── Per-theme × per-source semantic chunk counting ───────────────────────
+    # pub_chunk_hits: {(theme_id, source): {pub_id: n_chunks_above_threshold}}
+    pub_chunk_hits: dict[tuple[str, str], dict[str, int]] = {}
+
+    # Chroma returns at most n_results docs; 30k safely covers any single source.
+    # If n_results > available docs, Chroma returns all available.
+    MAX_PER_SRC = 30_000
+
+    for theme in themes:
+        print(f"  [{theme.id}] querying…", flush=True)
+        vec = theme_vecs[theme.id]
+        dist_cutoff = 1.0 - similarity_threshold   # cosine distance ≤ this
+
+        for src in source_keys:
+            key = (theme.id, src)
+            pub_chunk_hits[key] = {}
+            try:
+                res = collection.query(
+                    query_embeddings=[vec],
+                    n_results=MAX_PER_SRC,
+                    where={"source": src},
+                    include=["metadatas", "distances"],
+                )
+                for meta, dist in zip(res["metadatas"][0], res["distances"][0]):
+                    if dist > dist_cutoff:
+                        break  # sorted ascending; everything after is below threshold
+                    pid = meta.get("publication_id", "")
+                    if pid:
+                        pub_chunk_hits[key][pid] = pub_chunk_hits[key].get(pid, 0) + 1
+            except Exception as exc:
+                print(f"    Warning: {theme.id}/{src} query failed: {exc}", flush=True)
+
+    # ── Apply min_chunks filter → pub_sets ───────────────────────────────────
+    pub_sets: dict[tuple[str, str], set[str]] = {
+        key: {pid for pid, cnt in hits.items() if cnt >= min_chunks}
+        for key, hits in pub_chunk_hits.items()
+    }
+
+    # ── Build matrix with count + relative % ─────────────────────────────────
+    matrix: dict[str, dict[str, dict]] = {}
+    for theme in themes:
+        matrix[theme.id] = {}
+        for src in source_keys:
+            count = len(pub_sets.get((theme.id, src), set()))
+            total = source_totals.get(src, 1)
+            matrix[theme.id][src] = {
+                "count": count,
+                "pct":   round(count / total * 100, 1) if total else 0.0,
+                "total": total,
+            }
+
+    # ── Gaps, near_gaps, coverage_pct ────────────────────────────────────────
+    gaps:         list[tuple[str, str]] = []
+    near_gaps:    list[tuple[str, str]] = []
+    coverage_pct: dict[str, float]      = {}
+
+    for theme in themes:
+        nonzero = sum(1 for s in source_keys if matrix[theme.id][s]["count"] > 0)
+        coverage_pct[theme.id] = round(nonzero / len(source_keys) * 100, 1)
+        for s in source_keys:
+            count = matrix[theme.id][s]["count"]
+            if count == 0:
+                gaps.append((theme.label, s))
+            elif count <= 2:
+                near_gaps.append((theme.label, s))
+
+    return {
+        "matrix":        matrix,
+        "pub_sets":      pub_sets,
+        "theme_vecs":    theme_vecs,
+        "source_totals": source_totals,
+        "gaps":          gaps,
+        "near_gaps":     near_gaps,
+        "coverage_pct":  coverage_pct,
+        "params": {
+            "similarity_threshold": similarity_threshold,
+            "min_chunks":           min_chunks,
+        },
+    }
+
+
 # ── JSON Export ──────────────────────────────────────────────────────────────
 
 def export_gap_json(gap_result: dict, out_path: Path) -> None:
     """
     Write gap analysis results as a self-contained JSON file for the heatmap.
+    Handles both keyword-based (count-only) and semantic (count+pct+total) matrices.
     """
     themes      = get_all_themes()
     source_keys = list(SOURCES.keys())
-
     total_chunks = _get_collection().count()
+
+    # Detect matrix format: semantic has dict values, keyword has int values
+    sample_val = next(iter(next(iter(gap_result["matrix"].values())).values()), None)
+    is_semantic = isinstance(sample_val, dict)
 
     payload = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "total_chunks":  total_chunks,
+        "semantic":      is_semantic,
         "sources": [
-            {"key": k, "name": SOURCES[k]["name"]}
+            {
+                "key":   k,
+                "name":  SOURCES[k]["name"],
+                "total": gap_result.get("source_totals", {}).get(k),
+            }
             for k in source_keys
         ],
         "themes": [
             {
-                "id":          t.id,
-                "label":       t.label,
-                "direction":   t.direction,
-                "description": t.description,
-                "coverage":    gap_result["matrix"][t.id],
+                "id":           t.id,
+                "label":        t.label,
+                "direction":    t.direction,
+                "description":  t.description,
+                "coverage":     gap_result["matrix"][t.id],
                 "coverage_pct": gap_result["coverage_pct"][t.id],
             }
             for t in themes
@@ -253,6 +388,19 @@ def export_gap_json(gap_result: dict, out_path: Path) -> None:
             "gap_list":  [{"theme": g[0], "source": g[1]} for g in gap_result["gaps"]],
         },
     }
+
+    if is_semantic:
+        payload["methodology"] = {
+            "similarity_threshold": gap_result["params"]["similarity_threshold"],
+            "min_chunks":           gap_result["params"]["min_chunks"],
+            "description": (
+                f"A publication is counted as substantively engaging with a theme "
+                f"if ≥{gap_result['params']['min_chunks']} of its text chunks score "
+                f"≥{gap_result['params']['similarity_threshold']} cosine similarity "
+                f"to the theme description. Cell percentages are computed against each "
+                f"think tank's total English-language publication count."
+            ),
+        }
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(payload, indent=2, ensure_ascii=False))
@@ -334,26 +482,57 @@ def export_theme_files(gap_result: dict, out_dir: Path) -> None:
         }
 
         # ── Batch-fetch Chroma chunks for excerpt selection ──────────────────
-        # Fetch 100 pub_ids at a time using $in filter
-        pub_chunks: dict[str, list[dict]] = {pid: [] for pid in pub_ids_list}
+        # If theme_vecs available: use semantic query (returns chunks ranked by
+        # similarity to theme — first chunk per pub = best excerpt).
+        # Otherwise: unranked get() + keyword scoring fallback.
+        theme_vec = gap_result.get("theme_vecs", {}).get(theme.id)
+        best_excerpts: dict[str, str] = {}   # pid → best excerpt text
+        kw_set = theme_keywords[theme.id]
+
         BATCH = 100
         for i in range(0, len(pub_ids_list), BATCH):
             batch_ids = pub_ids_list[i : i + BATCH]
             try:
-                chroma_res = collection.get(
-                    where={"publication_id": {"$in": batch_ids}},
-                    include=["documents", "metadatas"],
-                )
-                for doc, meta in zip(chroma_res["documents"], chroma_res["metadatas"]):
+                if theme_vec is not None:
+                    # Semantic: ranked by similarity, first hit per pub is best
+                    chroma_res = collection.query(
+                        query_embeddings=[theme_vec],
+                        n_results=min(len(batch_ids) * 5, 500),
+                        where={"publication_id": {"$in": batch_ids}},
+                        include=["documents", "metadatas"],
+                    )
+                    docs_iter  = chroma_res["documents"][0]
+                    metas_iter = chroma_res["metadatas"][0]
+                else:
+                    # Keyword fallback: unranked
+                    chroma_res = collection.get(
+                        where={"publication_id": {"$in": batch_ids}},
+                        include=["documents", "metadatas"],
+                    )
+                    docs_iter  = chroma_res["documents"]
+                    metas_iter = chroma_res["metadatas"]
+
+                all_chunks: dict[str, list[str]] = {}
+                for doc, meta in zip(docs_iter, metas_iter):
                     pid = meta.get("publication_id", "")
-                    if pid in pub_chunks:
-                        pub_chunks[pid].append({"text": doc, "meta": meta})
+                    if pid not in all_chunks:
+                        all_chunks[pid] = []
+                    all_chunks[pid].append(doc)
+
+                for pid, chunks in all_chunks.items():
+                    if pid not in best_excerpts:
+                        if theme_vec is not None:
+                            # First chunk is already the most semantically relevant
+                            best_excerpts[pid] = _truncate_at_sentence(chunks[0]) if chunks else ""
+                        else:
+                            best_excerpts[pid] = _best_excerpt(
+                                [{"text": c} for c in chunks], kw_set
+                            )
             except Exception:
-                pass  # if a batch fails, continue without excerpts for those pubs
+                pass
 
         # ── Build per-source publication lists ───────────────────────────────
         sources_out: dict[str, list[dict]] = {}
-        kw_set = theme_keywords[theme.id]
 
         for src in source_keys:
             src_pub_ids = pub_sets.get((theme.id, src), set())
@@ -362,7 +541,7 @@ def export_theme_files(gap_result: dict, out_dir: Path) -> None:
             pubs = []
             for pid in src_pub_ids:
                 meta = pub_meta.get(pid, {})
-                excerpt = _best_excerpt(pub_chunks.get(pid, []), kw_set)
+                excerpt = best_excerpts.get(pid, "")
                 pubs.append({
                     "id":      pid,
                     "title":   meta.get("title", ""),
@@ -405,30 +584,53 @@ def _format_gap_table(gap_result: dict) -> str:
     source_keys = list(SOURCES.keys())
     matrix      = gap_result["matrix"]
 
+    # Detect semantic vs keyword matrix
+    sample_val = next(iter(next(iter(matrix.values())).values()), None)
+    is_semantic = isinstance(sample_val, dict)
+
+    col_w = 8 if is_semantic else _COL_W
     header = f"{'Theme':<{_LABEL_W}}" + "".join(
-        f"{_SOURCE_ABBREV.get(s, s):>{_COL_W}}" for s in source_keys
+        f"{_SOURCE_ABBREV.get(s, s):>{col_w}}" for s in source_keys
     )
     sep = "─" * len(header)
 
-    rows = [sep, header, sep]
+    mode_label = " (% of each source's total output)" if is_semantic else ""
+    rows = [sep, header + mode_label, sep]
+
     for theme in themes:
         row = f"{theme.label:<{_LABEL_W}}"
         for s in source_keys:
-            count = matrix[theme.id][s]
-            cell  = f"{count}*" if count == 0 else str(count)
-            row  += f"{cell:>{_COL_W}}"
+            val = matrix[theme.id][s]
+            if is_semantic:
+                pct = val["pct"]
+                cell = "0%*" if pct == 0 else (f"{pct:.0f}%" if pct >= 10 else f"{pct:.1f}%")
+            else:
+                count = val
+                cell  = f"{count}*" if count == 0 else str(count)
+            row += f"{cell:>{col_w}}"
         rows.append(row)
 
     rows.append(sep)
-    rows.append(f"\n* = gap (0 publications)  |  "
-                f"Gaps: {len(gap_result['gaps'])}  |  "
-                f"Near-gaps (1–2): {len(gap_result['near_gaps'])}")
+    rows.append(f"\n* = gap (0)  |  Gaps: {len(gap_result['gaps'])}  |  "
+                f"Near-gaps: {len(gap_result['near_gaps'])}")
 
-    rows.append("\nCoverage by theme (% of sources with ≥1 publication):")
-    for theme in themes:
-        pct = gap_result["coverage_pct"][theme.id]
-        bar = "█" * int(pct / 10)
-        rows.append(f"  {theme.label:<{_LABEL_W - 2}} {pct:5.1f}%  [{bar:<10}]")
+    if is_semantic:
+        p = gap_result["params"]
+        rows.append(f"Methodology: ≥{p['min_chunks']} chunks at ≥{p['similarity_threshold']} "
+                    f"cosine similarity to theme description")
+        rows.append("\nAbsolute counts (substantive pubs / total English pubs):")
+        for theme in themes:
+            parts = []
+            for s in source_keys:
+                v = matrix[theme.id][s]
+                parts.append(f"{_SOURCE_ABBREV.get(s,s)} {v['count']}/{v['total']}")
+            rows.append(f"  {theme.label:<{_LABEL_W - 2}}  {' | '.join(parts)}")
+    else:
+        rows.append("\nCoverage by theme (% of sources with ≥1 publication):")
+        for theme in themes:
+            pct = gap_result["coverage_pct"][theme.id]
+            bar = "█" * int(pct / 10)
+            rows.append(f"  {theme.label:<{_LABEL_W - 2}} {pct:5.1f}%  [{bar:<10}]")
 
     return "\n".join(rows)
 
@@ -471,6 +673,12 @@ if __name__ == "__main__":
                         help="(gap-analysis only) Write results as JSON to this path")
     parser.add_argument("--theme-files", metavar="DIR",
                         help="(gap-analysis only) Write per-theme JSON files to DIR/themes/")
+    parser.add_argument("--threshold", type=float, default=0.55, metavar="T",
+                        help="Semantic similarity threshold (default: 0.55)")
+    parser.add_argument("--min-chunks", type=int, default=2, metavar="N",
+                        help="Min chunks above threshold to count as substantive (default: 2)")
+    parser.add_argument("--keyword-only", action="store_true",
+                        help="Use keyword-based gap analysis instead of semantic")
 
     args = parser.parse_args()
 
@@ -478,7 +686,14 @@ if __name__ == "__main__":
         hits = search(args.search, n_results=args.n, source_filter=args.source)
         _print_search_results(hits, args.search)
     elif args.gap_analysis:
-        result = gap_analysis()
+        if args.keyword_only:
+            result = gap_analysis()
+        else:
+            print(f"Semantic gap analysis  threshold={args.threshold}  min_chunks={args.min_chunks}")
+            result = semantic_gap_analysis(
+                similarity_threshold=args.threshold,
+                min_chunks=args.min_chunks,
+            )
         print()
         print(_format_gap_table(result))
         if args.json_out:

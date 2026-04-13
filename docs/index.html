@@ -288,13 +288,21 @@
   <div class="intro">
     <h1>Africa–Europe Policy Research Coverage</h1>
     <p>
-      How well do leading Africa-Europe policy think tanks cover the key themes shaping
-      the relationship between the two continents? Each cell shows the number of
-      publications from that source that contain substantive coverage of the theme.
-      <strong>Click any cell</strong> to see the publications behind the number, with
-      source links and matching text excerpts.
+      How deeply do leading Africa-Europe policy think tanks engage with the key themes
+      shaping the relationship? Each cell shows what <strong>percentage of a think
+      tank's total publications</strong> substantively analyse that theme — not merely
+      mention it. This normalises for size: a small think tank covering a topic in 15%
+      of its output is more focused on it than a large one at 2%, even if the absolute
+      count is lower. <strong>Click any cell</strong> to see the publications and the
+      actual text that triggered the match.
     </p>
     <div class="meta-row" id="meta-row"><span>Loading…</span></div>
+    <div id="methodology-note" style="margin-top:12px; font-size:12px; color:var(--muted); display:none">
+      Methodology: a publication is counted as substantively engaging with a theme if
+      <span id="meth-min-chunks"></span> or more of its text chunks score
+      <span id="meth-threshold"></span>+ cosine similarity to the theme description
+      (full-text semantic embeddings via nomic-embed-text).
+    </div>
   </div>
 
   <div class="legend">
@@ -339,8 +347,8 @@ const SOURCE_ABBREV    = {
 
 // ── Colour scale ──────────────────────────────────────────────────────────────
 function heatColour(value, max) {
-  if (value === 0) return { bg: '#f0f0eb', fg: '#aaa' };
-  const t = Math.pow(value / max, 0.5);
+  if (value === 0) return { bg: '#f0f0eb', fg: '#bbb' };
+  const t = Math.pow(value / max, 0.5);   // sqrt scale — compresses extremes
   const stops = [[248,247,240],[200,230,200],[90,171,90],[2,66,3]];
   const seg = t * (stops.length - 1);
   const idx = Math.min(Math.floor(seg), stops.length - 2);
@@ -349,6 +357,11 @@ function heatColour(value, max) {
   const r = Math.round(r1+(r2-r1)*frac), g = Math.round(g1+(g2-g1)*frac), b = Math.round(b1+(b2-b1)*frac);
   const brightness = 0.299*r + 0.587*g + 0.114*b;
   return { bg: `rgb(${r},${g},${b})`, fg: brightness > 140 ? '#171717' : '#ffffff' };
+}
+
+function fmtPct(pct) {
+  if (pct === 0) return '0%';
+  return pct >= 10 ? `${Math.round(pct)}%` : `${pct.toFixed(1)}%`;
 }
 
 // ── Tooltip ───────────────────────────────────────────────────────────────────
@@ -365,13 +378,22 @@ document.addEventListener('mousemove', e => {
   tooltipEl.style.top  = y + 'px';
 });
 
-function showTooltip(theme, sourceName, count) {
+function showTooltip(theme, src, coverage, isSemantic) {
   _tooltipActive = true;
-  const pubWord = count === 1 ? 'publication' : 'publications';
+  let body;
+  if (isSemantic) {
+    const { count, pct, total } = coverage;
+    const pubWord = count === 1 ? 'publication' : 'publications';
+    body = `${src.name}: <strong>${count}</strong> ${pubWord} substantively engage
+      <br><strong>${fmtPct(pct)}</strong> of their ${total.toLocaleString()} total`;
+  } else {
+    const pubWord = coverage === 1 ? 'publication' : 'publications';
+    body = `${src.name}: <strong>${coverage}</strong> ${pubWord}`;
+  }
   tooltipEl.innerHTML = `
     <strong>${theme.label}</strong>
-    ${sourceName}: <strong>${count}</strong> ${pubWord}
-    <div class="hint">Click to explore publications →</div>
+    ${body}
+    <div class="hint">Click to explore →</div>
   `;
   tooltipEl.classList.add('visible');
 }
@@ -388,7 +410,7 @@ const pubList     = document.getElementById('panel-pub-list');
 const _themeCache = {};
 let   _activeCell = null;
 
-function openPanel(theme, src, cellEl) {
+function openPanel(theme, src, cellEl, coverage, isSemantic) {
   // Update header immediately
   const badge = document.getElementById('panel-direction-badge');
   badge.textContent  = DIRECTION_LABELS[theme.direction] || theme.direction;
@@ -417,7 +439,7 @@ function openPanel(theme, src, cellEl) {
         .then(d => { _themeCache[theme.id] = d; return d; });
 
   load
-    .then(data => renderPubs(data, src, theme.coverage[src.key]))
+    .then(data => renderPubs(data, src, coverage, isSemantic))
     .catch(err => {
       pubList.innerHTML = `<div class="panel-error">
         Could not load theme data: ${err.message}<br>
@@ -436,10 +458,15 @@ panelClose.addEventListener('click', closePanel);
 backdrop.addEventListener('click', closePanel);
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closePanel(); });
 
-function renderPubs(data, src, count) {
+function renderPubs(data, src, coverage, isSemantic) {
   const pubs = (data.sources || {})[src.key] || [];
-  document.getElementById('panel-source-count').textContent =
-    `${pubs.length} publication${pubs.length !== 1 ? 's' : ''}`;
+  let countLabel;
+  if (isSemantic && coverage && typeof coverage === 'object') {
+    countLabel = `${pubs.length} publication${pubs.length !== 1 ? 's' : ''} · ${fmtPct(coverage.pct)} of ${coverage.total.toLocaleString()} total`;
+  } else {
+    countLabel = `${pubs.length} publication${pubs.length !== 1 ? 's' : ''}`;
+  }
+  document.getElementById('panel-source-count').textContent = countLabel;
 
   if (!pubs.length) {
     pubList.innerHTML = '<div class="panel-loading">No publications found for this cell.</div>';
@@ -489,12 +516,29 @@ function buildHeatmap(data) {
   `;
   document.getElementById('footer-date').textContent = `· ${date}`;
 
+  // Show methodology note for semantic data
+  if (isSemantic && data.methodology) {
+    const note = document.getElementById('methodology-note');
+    note.style.display = 'block';
+    document.getElementById('meth-min-chunks').textContent = data.methodology.min_chunks;
+    document.getElementById('meth-threshold').textContent  = data.methodology.similarity_threshold;
+  }
+
   // Add coverage map to theme objects for easy lookup in openPanel
   const themeMap = {};
   data.themes.forEach(t => { themeMap[t.id] = t; });
 
+  // Detect semantic vs keyword data
+  const isSemantic = !!data.semantic;
+
+  // For colour scale: use pct if semantic, count if keyword
   let maxVal = 0;
-  data.themes.forEach(t => Object.values(t.coverage).forEach(v => { if (v > maxVal) maxVal = v; }));
+  data.themes.forEach(t => {
+    Object.values(t.coverage).forEach(v => {
+      const num = isSemantic ? v.pct : v;
+      if (num > maxVal) maxVal = num;
+    });
+  });
 
   const grouped = {};
   DIRECTION_ORDER.forEach(d => { grouped[d] = []; });
@@ -546,8 +590,10 @@ function buildHeatmap(data) {
       tr.appendChild(tdName);
 
       data.sources.forEach(src => {
-        const count = theme.coverage[src.key] ?? 0;
-        const { bg, fg } = heatColour(count, maxVal);
+        const coverage = theme.coverage[src.key] ?? (isSemantic ? {count:0, pct:0, total:0} : 0);
+        const displayVal = isSemantic ? coverage.pct : coverage;
+        const { bg, fg } = heatColour(displayVal, maxVal);
+
         const td = document.createElement('td');
         td.className = 'cell';
 
@@ -555,15 +601,19 @@ function buildHeatmap(data) {
         inner.className = 'cell-inner';
         inner.style.background = bg;
         inner.style.color = fg;
-        inner.textContent = count;
+        inner.textContent = isSemantic ? fmtPct(coverage.pct) : coverage;
         inner.tabIndex = 0;
         inner.setAttribute('role', 'button');
-        inner.setAttribute('aria-label', `${theme.label}, ${src.name}: ${count} publications`);
+        inner.setAttribute('aria-label',
+          isSemantic
+            ? `${theme.label}, ${src.name}: ${coverage.count} publications (${fmtPct(coverage.pct)} of total)`
+            : `${theme.label}, ${src.name}: ${coverage} publications`
+        );
 
-        inner.addEventListener('mouseenter', () => showTooltip(theme, src.name, count));
+        inner.addEventListener('mouseenter', () => showTooltip(theme, src, coverage, isSemantic));
         inner.addEventListener('mouseleave', hideTooltip);
-        inner.addEventListener('click',      () => openPanel(theme, src, inner));
-        inner.addEventListener('keydown',    e => { if (e.key === 'Enter' || e.key === ' ') openPanel(theme, src, inner); });
+        inner.addEventListener('click',      () => openPanel(theme, src, inner, coverage, isSemantic));
+        inner.addEventListener('keydown',    e => { if (e.key === 'Enter' || e.key === ' ') openPanel(theme, src, inner, coverage, isSemantic); });
 
         td.appendChild(inner);
         tr.appendChild(td);
