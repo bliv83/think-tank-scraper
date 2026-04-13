@@ -211,6 +211,7 @@ def gap_analysis() -> dict:
 
     return {
         "matrix":       matrix,
+        "pub_sets":     pub_sets,   # {(theme_id, source): set of pub_ids}
         "gaps":         gaps,
         "near_gaps":    near_gaps,
         "coverage_pct": coverage_pct,
@@ -256,6 +257,132 @@ def export_gap_json(gap_result: dict, out_path: Path) -> None:
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(payload, indent=2, ensure_ascii=False))
     print(f"Exported gap analysis → {out_path}")
+
+
+# ── Theme file export ─────────────────────────────────────────────────────────
+
+def _truncate_at_sentence(text: str, max_chars: int = 400) -> str:
+    text = text.strip().replace("\n", " ")
+    if len(text) <= max_chars:
+        return text
+    truncated = text[:max_chars]
+    last_period = max(truncated.rfind(". "), truncated.rfind(".\n"))
+    if last_period > max_chars // 2:
+        return truncated[:last_period + 1].strip()
+    return truncated.strip() + "…"
+
+
+def _best_excerpt(chunks: list[dict], theme_keywords: set[str]) -> str:
+    """Return the chunk text with the most keyword hits for this theme."""
+    def score(c: dict) -> int:
+        text = c["text"].lower()
+        return sum(1 for kw in theme_keywords if kw in text)
+    best = max(chunks, key=score, default=None)
+    if not best:
+        return ""
+    return _truncate_at_sentence(best["text"])
+
+
+def export_theme_files(gap_result: dict, out_dir: Path) -> None:
+    """
+    Write one JSON file per theme to out_dir/themes/{theme_id}.json.
+
+    Each file contains per-source publication lists with titles, dates, URLs,
+    authors, and a representative text excerpt for that theme.
+    """
+    from pipeline.db import get_db  # local import to avoid circular issues
+
+    themes      = get_all_themes()
+    source_keys = list(SOURCES.keys())
+    pub_sets    = gap_result["pub_sets"]
+    collection  = _get_collection()
+
+    theme_keywords: dict[str, set[str]] = {
+        t.id: {kw.lower() for kw in t.keywords} for t in themes
+    }
+
+    themes_dir = out_dir / "themes"
+    themes_dir.mkdir(parents=True, exist_ok=True)
+
+    db = get_db()
+
+    for theme in themes:
+        print(f"  Exporting theme: {theme.label}", flush=True)
+
+        # Collect all pub_ids that appear in this theme (across all sources)
+        all_pub_ids: set[str] = set()
+        for src in source_keys:
+            all_pub_ids |= pub_sets.get((theme.id, src), set())
+
+        if not all_pub_ids:
+            out_path = themes_dir / f"{theme.id}.json"
+            out_path.write_text(json.dumps(
+                {"id": theme.id, "label": theme.label, "sources": {}}, indent=2
+            ))
+            continue
+
+        # ── Batch-fetch SQLite metadata ──────────────────────────────────────
+        pub_ids_list = list(all_pub_ids)
+        placeholders = ",".join("?" * len(pub_ids_list))
+        rows = db.execute(
+            f"SELECT id, title, date, url, authors FROM publications WHERE id IN ({placeholders})",
+            pub_ids_list,
+        ).fetchall()
+        pub_meta: dict[str, dict] = {
+            r[0]: {"title": r[1] or "", "date": r[2] or "", "url": r[3] or "", "authors": r[4] or ""}
+            for r in rows
+        }
+
+        # ── Batch-fetch Chroma chunks for excerpt selection ──────────────────
+        # Fetch 100 pub_ids at a time using $in filter
+        pub_chunks: dict[str, list[dict]] = {pid: [] for pid in pub_ids_list}
+        BATCH = 100
+        for i in range(0, len(pub_ids_list), BATCH):
+            batch_ids = pub_ids_list[i : i + BATCH]
+            try:
+                chroma_res = collection.get(
+                    where={"publication_id": {"$in": batch_ids}},
+                    include=["documents", "metadatas"],
+                )
+                for doc, meta in zip(chroma_res["documents"], chroma_res["metadatas"]):
+                    pid = meta.get("publication_id", "")
+                    if pid in pub_chunks:
+                        pub_chunks[pid].append({"text": doc, "meta": meta})
+            except Exception:
+                pass  # if a batch fails, continue without excerpts for those pubs
+
+        # ── Build per-source publication lists ───────────────────────────────
+        sources_out: dict[str, list[dict]] = {}
+        kw_set = theme_keywords[theme.id]
+
+        for src in source_keys:
+            src_pub_ids = pub_sets.get((theme.id, src), set())
+            if not src_pub_ids:
+                continue
+            pubs = []
+            for pid in src_pub_ids:
+                meta = pub_meta.get(pid, {})
+                excerpt = _best_excerpt(pub_chunks.get(pid, []), kw_set)
+                pubs.append({
+                    "id":      pid,
+                    "title":   meta.get("title", ""),
+                    "date":    meta.get("date", ""),
+                    "url":     meta.get("url", ""),
+                    "authors": meta.get("authors", ""),
+                    "excerpt": excerpt,
+                })
+            # Sort by date descending, empty dates last
+            pubs.sort(key=lambda p: p["date"] or "0000", reverse=True)
+            sources_out[src] = pubs
+
+        out_path = themes_dir / f"{theme.id}.json"
+        out_path.write_text(json.dumps(
+            {"id": theme.id, "label": theme.label, "sources": sources_out},
+            indent=2, ensure_ascii=False,
+        ))
+        print(f"    → {out_path} ({sum(len(v) for v in sources_out.values())} pubs)", flush=True)
+
+    print(f"Theme files written to {themes_dir}/")
 
 
 # ── Formatting ────────────────────────────────────────────────────────────────
@@ -342,6 +469,8 @@ if __name__ == "__main__":
                         help="Number of search results (default: 10)")
     parser.add_argument("--json-out", metavar="PATH",
                         help="(gap-analysis only) Write results as JSON to this path")
+    parser.add_argument("--theme-files", metavar="DIR",
+                        help="(gap-analysis only) Write per-theme JSON files to DIR/themes/")
 
     args = parser.parse_args()
 
@@ -354,3 +483,6 @@ if __name__ == "__main__":
         print(_format_gap_table(result))
         if args.json_out:
             export_gap_json(result, Path(args.json_out))
+        if args.theme_files:
+            print("\nExporting per-theme files…")
+            export_theme_files(result, Path(args.theme_files))
