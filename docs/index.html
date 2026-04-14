@@ -516,6 +516,9 @@ function buildHeatmap(data) {
   `;
   document.getElementById('footer-date').textContent = `· ${date}`;
 
+  // Detect semantic vs keyword data
+  const isSemantic = !!data.semantic;
+
   // Show methodology note for semantic data
   if (isSemantic && data.methodology) {
     const note = document.getElementById('methodology-note');
@@ -527,9 +530,6 @@ function buildHeatmap(data) {
   // Add coverage map to theme objects for easy lookup in openPanel
   const themeMap = {};
   data.themes.forEach(t => { themeMap[t.id] = t; });
-
-  // Detect semantic vs keyword data
-  const isSemantic = !!data.semantic;
 
   // For colour scale: use pct if semantic, count if keyword
   let maxVal = 0;
